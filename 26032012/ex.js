@@ -23,3 +23,7 @@ var bisec = function (p) {
 	return [u,u]
 
 }
+
+var m = MAP(bisec)(domain)
+
+DRAW (m)
