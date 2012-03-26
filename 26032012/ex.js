@@ -27,3 +27,14 @@ var bisec = function (p) {
 var m = MAP(bisec)(domain)
 
 DRAW (m)
+
+---------------------------
+
+var domain([[0,20*PI]])([40])
+
+var sin = function(p) {
+	var u = p[0];
+	return [u, Math.sin(u)]
+}
+
+var s = MAP(sin)(domain)
