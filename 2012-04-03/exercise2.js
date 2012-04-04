@@ -1,4 +1,4 @@
-//Basement
+//Basement, si suppone un altezza da terra di 1 metro
 
 var b1 = SIMPLEX_GRID([
 	[1],
@@ -13,8 +13,7 @@ var b2 = SIMPLEX_GRID([
 	[1]
 	]);
 
-//Struttura sotto la vasca frontale
-
+//Struttura sotto la vasca frontale, si suppone che la profondità sia di 50 cm
 var b3 = SIMPLEX_GRID([
 	[-1, 20],
 	[-1, 9],
@@ -106,7 +105,6 @@ var steps = STRUCT([s1, s2, s3]);
 var basement = STRUCT([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, steps])
 
 
-//DRAW(basement)
 
 //Muri di sinstra
 
@@ -271,7 +269,7 @@ var grid2 = SIMPLEX_GRID([
 var wind = STRUCT([grid1, grid2])
 
 
-//Creazione muro di vetro 1
+//Creazione vetrata 1
 
 var t1 = T([0])([4])
 
@@ -281,7 +279,7 @@ var glassWall1Struct = STRUCT([wind,t1, wind, t1, wind])
 var glassWall1 = T([0,1,2])([29, 4.6, 1])(glassWall1Struct)
 
 
-//Creazione intelaiatura secondo muro vetro
+//Creazione intelaiatura vetrata 2
 
 var gridB1 = SIMPLEX_GRID([
 	[0.1],
@@ -298,7 +296,7 @@ var gridB2 = SIMPLEX_GRID([
 
 var wind2 = STRUCT([gridB1, gridB2])
 
-//Creazione muro di vetro 2
+//Creazione vetrata 2
 
 var t2 = T([1])([1])
 
@@ -307,11 +305,11 @@ var glassWall2Struct = STRUCT([wind2, t2, wind2, t2, wind2, t2, wind2, t2, wind2
 
 var glassWall2 = T([0,1,2])([44.2, 6, 1])(glassWall2Struct)
 
+
+//Insieme per tutti i muri del pavilion
+
 var walls = STRUCT([sxWalls, dxWalls, poolWall, wallsD, wallsP, glassWall1, glassWall2])
 
-
-
-//DRAW(walls)
 
 
 //Creazione tetto dependance
@@ -334,7 +332,6 @@ var roofP = SIMPLEX_GRID([
 var roofs = STRUCT([roofD, roofP])
 
 
-//DRAW(roofs)
 
 //Creazione panca
 
@@ -364,12 +361,17 @@ var lastraPanca = SIMPLEX_GRID([
 var panca = STRUCT([sostegni, lastraPanca])
 
 
+//Creazione colonne
+
 var column = SIMPLEX_GRID([
 	[-26, 0.1, -6.1, 0.1, -6.9, 0.1, -6.1, 0.1],
 	[-6.8, 0.1, -6.8, 0.1],
 	[-1, 3]
 	])
 
+
+
+//Unione struttura intera
 
 var pavilion = STRUCT([basement, walls, roofs, panca, column])
 

@@ -1,5 +1,80 @@
-//Basement
+//Creazione sedia modello pavilion
 
+//Schienale
+var chairPiece1 = SIMPLEX_GRID([
+	[0.2*3],
+	[0.04*3],
+	[-0.1, 0.3*3]
+	])
+
+
+var ch = R([0])(PI/6)(chairPiece1)
+
+
+
+//Seduta
+var chairPiece2 = SIMPLEX_GRID([
+	[0.2*3],
+	[0.2*3],
+	[-0.1, 0.04*3]
+	])
+
+var ch2 =  R([0])(PI/6)(chairPiece2)
+
+
+//Supporti
+var support = SIMPLEX_GRID([
+	[0.01*3],
+	[0.01*3],
+	[0.1*3]
+	])
+
+var support2 = SIMPLEX_GRID([
+	[-0.18*3, 0.01*3],
+	[0.01*3],
+	[0.1*3]
+	])
+
+
+var supFront = STRUCT([support, support2])
+
+var sp =  R([0])(PI/6)(supFront)
+
+
+
+var support3 = SIMPLEX_GRID([
+	[0.01],
+	[0.01],
+	[0.25]
+	])
+
+var support4 = SIMPLEX_GRID([
+	[-0.18*3, 0.01],
+	[0.01],
+	[0.25]
+	])
+
+var sp2 = STRUCT([support3, support4])
+
+var tr = T([1,2])([-0.18, -0.1])(sp2)
+
+var r2 = R([0])(-PI/8)(tr)
+
+
+var chair = STRUCT([ch, ch2, sp, r2])
+
+
+
+
+
+chairFrame = COLOR([0.2,0.2,0.2])(chair)
+
+
+
+
+
+
+//Basement
 var b1 = SIMPLEX_GRID([
 	[1],
 	[2],
@@ -105,9 +180,6 @@ var s3 = SIMPLEX_GRID([
 var steps = STRUCT([s1, s2, s3]);
 
 var basement = STRUCT([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, steps])
-
-
-//Colorazione base
 
 var basementFrame = COLOR([1, 0.98, 0.98])(basement)
 
@@ -227,7 +299,6 @@ var wD4 = SIMPLEX_GRID([
 var wallsD = STRUCT([wD1, wD2, wD3, wD4])
 
 
-//Colorazione mura
 
 var externalWallsFrame =  COLOR([1, 0.98, 0.98])(STRUCT([sxWalls, dxWalls, poolWall, wallsD]))
 
@@ -260,7 +331,6 @@ var centralWall = SIMPLEX_GRID([
 	])
 
 
-//Colorazione mura interne della struttura principale
 
 
 var centralWallFrame = COLOR([0.45, 0.17, 0.06])(centralWall)
@@ -326,8 +396,12 @@ var glassWall2 = T([0,1,2])([44.2, 6.5, 1])(glassWall2Struct)
 
  
 var walls = STRUCT([externalWallsFrame, wallsP, glassWall1, glassWall2])
+/*
+var walls = STRUCT([sxWalls, dxWalls, poolWall, wallsD, wallsP, glassWall1, glassWall2])
+*/
 
 
+//DRAW(walls)
 
 
 //Creazione tetto dependance
@@ -387,7 +461,7 @@ var pancaFrame =  COLOR([1, 0.98, 0.98])(panca)
 var fPool = SIMPLEX_GRID([
 	[-1.1, 19.9],
 	[-1.1, 8.9],
-	[-0.5, 0.4]
+	[-0.6, 0.4]
 	])
 
 
@@ -410,7 +484,19 @@ var column = SIMPLEX_GRID([
 
 
 
-var pavilion = STRUCT([basementFrame, walls, roofsFrame, pancaFrame, waterpoolsFrame, column])
+var c1 = R([2])([PI])(chairFrame)
+var c2 = R([2])([PI])(chairFrame)
+
+var chair1 = T([0,1,2])([39, 11, 1])(c1)
+
+var chair2 = T([0,1,2])([41, 11, 1])(c2)
+
+
+
+var furniture = STRUCT([chair1, chair2])
+
+
+var pavilion = STRUCT([basementFrame, walls, roofsFrame, pancaFrame, waterpoolsFrame, column, furniture])
 
 
 DRAW(pavilion)
