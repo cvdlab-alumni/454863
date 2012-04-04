@@ -21,6 +21,7 @@ var b3 = SIMPLEX_GRID([
 	[0.5]
 	])
 
+
 //Struttura in alto a sinistra
 var b4 = SIMPLEX_GRID([
 	[-1,8],
@@ -105,8 +106,10 @@ var steps = STRUCT([s1, s2, s3]);
 
 var basement = STRUCT([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, steps])
 
+var basementFrame = COLOR([1, 0.98, 0.98])(basement)
 
-//DRAW(basement)
+
+
 
 //Muri di sinstra
 
@@ -222,6 +225,9 @@ var wallsD = STRUCT([wD1, wD2, wD3, wD4])
 
 
 
+var externalWallsFrame =  COLOR([1, 0.98, 0.98])(STRUCT([sxWalls, dxWalls, poolWall, wallsD]))
+
+
 //Mura interne struttura principale
 
 var wallP1 = SIMPLEX_GRID([
@@ -251,7 +257,13 @@ var centralWall = SIMPLEX_GRID([
 
 
 
-var wallsP = STRUCT([wallP1, wallP2, wallP3, centralWall])
+
+var centralWallFrame = COLOR([0.45, 0.17, 0.06])(centralWall)
+
+var internalWallFrame = COLOR([0.16, 0.14, 0.14])(STRUCT([wallP1, wallP2, wallP3]))
+
+
+var wallsP = STRUCT([internalWallFrame, centralWallFrame])
 
 
 
@@ -305,10 +317,13 @@ var t2 = T([1])([1])
 var glassWall2Struct = STRUCT([wind2, t2, wind2, t2, wind2, t2, wind2, t2, wind2, t2, wind2, t2, wind2, t2, wind2])
 
 
-var glassWall2 = T([0,1,2])([44.2, 6, 1])(glassWall2Struct)
+var glassWall2 = T([0,1,2])([44.2, 6.5, 1])(glassWall2Struct)
 
+ 
+var walls = STRUCT([externalWallsFrame, wallsP, glassWall1, glassWall2])
+/*
 var walls = STRUCT([sxWalls, dxWalls, poolWall, wallsD, wallsP, glassWall1, glassWall2])
-
+*/
 
 
 //DRAW(walls)
@@ -331,7 +346,7 @@ var roofP = SIMPLEX_GRID([
 	[-4, 1]
 	])
 
-var roofs = STRUCT([roofD, roofP])
+var roofsFrame = COLOR([0.3, 0.3, 0.3])(STRUCT([roofD, roofP]))
 
 
 //DRAW(roofs)
@@ -363,6 +378,28 @@ var lastraPanca = SIMPLEX_GRID([
 
 var panca = STRUCT([sostegni, lastraPanca])
 
+var pancaFrame =  COLOR([1, 0.98, 0.98])(panca)
+
+
+//Creazione frame colorazione acqua
+
+var fPool = SIMPLEX_GRID([
+	[-1.1, 19.9],
+	[-1.1, 8.9],
+	[-0.6, 0.4]
+	])
+
+
+var rPool = SIMPLEX_GRID([
+	[-47.1, 3.8],
+	[-5.1, 10.8],
+	[-0.5, 0.4]
+])
+
+var waterpoolsFrame = COLOR([0.3, 0.8, 0.8])(STRUCT([fPool, rPool]))
+
+
+//Creazione colonne
 
 var column = SIMPLEX_GRID([
 	[-26, 0.1, -6.1, 0.1, -6.9, 0.1, -6.1, 0.1],
@@ -371,7 +408,8 @@ var column = SIMPLEX_GRID([
 	])
 
 
-var pavilion = STRUCT([basement, walls, roofs, panca, column])
+
+var pavilion = STRUCT([basementFrame, walls, roofsFrame, pancaFrame, waterpoolsFrame, column])
 
 
 DRAW(pavilion)
