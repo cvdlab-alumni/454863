@@ -30,7 +30,7 @@ DRAW (m)
 
 ---------------------------
 
-var domain([[0,20*PI]])([40])
+var domain([[0,10*PI]])([40])
 
 var sin = function(p) {
 	var u = p[0];
@@ -38,3 +38,39 @@ var sin = function(p) {
 }
 
 var s = MAP(sin)(domain)
+
+
+----------------------------
+
+
+var mapping = function (p) {
+	var u = p[0];
+	return [u, 1]
+}
+
+
+
+var drawCircle = function(r,n) {
+	var d = DOMAIN([[0,10*PI]])([40])
+	
+}
+
+--------------------------------------
+
+
+
+var drawCilinder = function(r,h,n,m) {
+	
+	var domain = DOMAIN ([[0,2*PI], [0,h]])([n, m])
+	var mapping = function(p) {
+		var u = p[0];
+		var v = p[1];
+		return [r*COS(u), r*SIN(u), v];
+	}
+	var mapped = MAP(mapping)(domain)
+	DRAW (mapped);
+
+
+}
+
+
