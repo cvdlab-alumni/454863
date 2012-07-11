@@ -1,6 +1,6 @@
 //VELA
 
-var turns = 2;
+var turns = 1.5;
 var angle = turns * 2 * PI;
 var radius_max = 16;
 var radius_min = 1;
@@ -10,13 +10,15 @@ var mapping = function (p) {
   var a = p[0];
   var r = p[1] * (1 + a / angle);
   var h = height - (a / angle * height);
-  return [r * COS(a), r * SIN(a), h];
+  return [r * -COS(a), r * SIN(a), h];
 };
 var vela = MAP(mapping)(domain2);
 
 var posVela = T([2])([22])(vela)
 
 DRAW(COLOR([1,1,1])(posVela));
+
+
 
 //Base centrale
 
@@ -36,7 +38,6 @@ var dPos = T([2])([1])(d)
 
 var base1 = STRUCT([b,dPos]) 
 
-//DRAW(base1)
 
 //Base esterna
 
@@ -115,7 +116,6 @@ var asta = STRUCT([rotAsta, posTappo, supAsta])
 
 
 
-//DRAW(asta)
 
 
 var rotAste = R([0,1])([PI/2])
@@ -123,26 +123,22 @@ var rotAste = R([0,1])([PI/2])
 var aste = T([2])([7])(STRUCT([asta, rotAste, asta, rotAste, asta, rotAste, asta]))
 
 
-//DRAW(aste)
+
 
 
 
 //Sostegni vela
 
-var sost = SCALE([0,1,2])([0.5,2.6,0.5])(asta)
 
-var posSost1 = T([0,2])([-2.2, 37])(R([0,1])([PI/2])(sost))
+var sost = SCALE([0,1,2])([0.5,2.52,0.5])(asta)
+
+var posSost1 = T([0,2])([1.5, 37])(R([0,1])([-PI/2])(sost))
 
 var sost2 = SCALE([0,1,2])([2.05,1.1,1.1])(posSost1)
 
-var posSost2 = T([0,2])([-0.8,-18.7])(sost2)
+var posSost2 = T([0,2])([-1.2,-18.7])(R([0,1])([PI])(sost2))
 
 var sostegni = STRUCT([posSost1, posSost2])
-
-//DRAW(sostegni)
-
-
-
 
 
 //Travi di supporto per la base esterna
@@ -213,14 +209,14 @@ DRAW(tapMod2)
 
 //Tiranti
 
-var tir1 = POLYLINE([[8.8,18,0],[11,13,36]])
-var tir2 = POLYLINE([[17.9,8,0],[21,3,29.3]])
-var tir3 = POLYLINE([[-12,16,0],[-11,13,34.3]])
-var tir4 = POLYLINE([[-17.8,8,0],[-21,3,25.8]])
-var tir5 = POLYLINE([[-8.8,-18,0],[-11,-13,32]])
-var tir6 = POLYLINE([[-17.9,-8,0],[-22,-10,25]])
-var tir7 = POLYLINE([[8.8,-18,0],[11,-13,30.5]])
-var tir8 = POLYLINE([[17.9,-8,0],[22,-10,22.5]])
+var tir1 = POLYLINE([[8.8,18,0],[11,13,33.4]])
+var tir2 = POLYLINE([[17.9,8,0],[19,7,32.5]])
+var tir3 = POLYLINE([[-12,16,0],[-11,13,35.6]])
+var tir4 = POLYLINE([[-17.8,8,0],[-21,3,26.5]])
+var tir5 = POLYLINE([[-8.8,-18,0],[-11,-13,28.3]])
+var tir6 = POLYLINE([[-17.9,-8,0],[-22,-10,27.7]])
+var tir7 = POLYLINE([[8.8,-18,0],[11,-13,30.6]])
+var tir8 = POLYLINE([[17.9,-8,0],[20,-5,31.6]])
 
 
 var tirs = STRUCT([tir1,tir2,tir3,tir4,tir5,tir6,tir7,tir8])
