@@ -16,7 +16,7 @@ var vela = MAP(mapping)(domain2);
 
 var posVela = T([2])([22])(vela)
 
-DRAW(COLOR([1,1,1])(posVela));
+var cVela = COLOR([1,1,1])(posVela);
 
 
 
@@ -55,9 +55,6 @@ var d3 = MAP(mapping3)(domain3);
 var d4 = T([2])([0.5])(d3)
 
 var base2 = STRUCT([b2,d3,d4])
-
-
-var base = STRUCT([base1,base2])
 
 
 
@@ -220,10 +217,35 @@ var tir8 = POLYLINE([[17.9,-8,0],[20,-5,31.6]])
 
 
 var tirs = STRUCT([tir1,tir2,tir3,tir4,tir5,tir6,tir7,tir8])
-DRAW(COLOR([0.5,0.5,0.5])(tirs))
+var cTirs = COLOR([0.5,0.5,0.5])(tirs)
+
+
+var wooden = STRUCT([base1,base2,pilone,aste,sostegni,supportStruct])
+var woodenFrame = COLOR([237/255,180/255,100/255])(wooden)
+
+
+var vite = STRUCT([cVela,woodenFrame,cTirs])
+
+DRAW(vite)
 
 
 
-var vite = STRUCT([base,pilone,aste,sostegni,supportStruct])
+//Funzione che implementa l'animazione della rotazione della Vite con tasto di conferma per attivarla
 
-DRAW(COLOR([237/255,180/255,100/255])(vite))
+
+function Fly() {
+  var messaggio = 'Vuoi attivare il movimento della vite aerea?'
+
+  var scelta = confirm(messaggio)
+
+  if (scelta == true) {
+    setInterval(function () {
+    vite.rotate([0,1], PI/45);
+    }, 60);
+  }
+
+}
+
+Fly()
+
+  
